@@ -2,7 +2,6 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 
 //Routes
-import IndexRoutes from './routes/index.routes'
 import RadarRoutes from './routes/radar.routes'
 
 export class App {
@@ -24,7 +23,6 @@ export class App {
     }
 
     routes() {
-        this.app.use(IndexRoutes);
         this.app.use('/radar/', RadarRoutes);
     }
 

@@ -1,4 +1,6 @@
+import { Scan } from '../interface/Scan.interface'
+
 export interface Radar {
-    id?: string;
-    title: string;
+    protocols: [string];
+    scan: [Scan];
 }
