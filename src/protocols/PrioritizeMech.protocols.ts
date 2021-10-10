@@ -3,7 +3,8 @@ import { Protocol } from "./Protocol.protocols";
 
 export class PrioritizeMech extends Protocol{
 
-    executeAction(scan: Scan[]): Scan[] {
+    executeAction(): Scan[]{
+        let scan = this.scan;
         let scanMech: Scan[] = [];
         let scanSoldiers: Scan[] = [];
         let isMech: Scan | undefined;

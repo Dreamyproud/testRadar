@@ -12,20 +12,24 @@ export class RadarService {
 
     sendObjectives(radar: Radar) {
         let coordinatesResult: Coordinates | undefined;
-        let avoidMech = new AvoidMech(radar.scan);
-        let prioritizeMech = new PrioritizeMech(radar.scan);
-        let avoidCrossfire = new AvoidCrossfire(radar.scan);
-        let closestEnemies = new ClosestEnemies(radar.scan);
-        let furthestEnemies = new FurthestEnemies(radar.scan);
-        let assistAllies = new AssistAllies(radar.scan);
+        let avoidMech = new AvoidMech();
+        let prioritizeMech = new PrioritizeMech();
+        let avoidCrossfire = new AvoidCrossfire();
+        let closestEnemies = new ClosestEnemies();
+        let furthestEnemies = new FurthestEnemies();
+        let assistAllies = new AssistAllies();
         let scanList: Scan[] = radar.scan;
+
         for (let i = 0; i < radar.protocols.length; i++) {
             if (radar.protocols[i] == 'avoid-mech') {
-                scanList = avoidMech.executeAction(scanList);
+                avoidMech.scan = scanList;
+                scanList = avoidMech.executeAction();
             } else if (radar.protocols[i] == 'prioritize-mech') {
-                scanList = prioritizeMech.executeAction(scanList);
+                prioritizeMech.scan = scanList;
+                scanList = prioritizeMech.executeAction();
             } else if (radar.protocols[i] == 'avoid-crossfire') {
-                scanList = avoidCrossfire.executeAction(scanList);
+                avoidCrossfire.scan = scanList;
+                scanList = avoidCrossfire.executeAction();
             }
             if (radar.protocols.length == 1) {
                 coordinatesResult = scanList[0].coordinates;
@@ -34,11 +38,14 @@ export class RadarService {
 
         for (let i = 0; i < radar.protocols.length; i++) {
             if (radar.protocols[i] == 'closest-enemies') {
-                coordinatesResult = closestEnemies.executeAction(scanList);
+                closestEnemies.scan = scanList;
+                coordinatesResult = closestEnemies.executeAction();
             } else if (radar.protocols[i] == 'furthest-enemies') {
-                coordinatesResult = furthestEnemies.executeAction(scanList);
+                furthestEnemies.scan = scanList;
+                coordinatesResult = furthestEnemies.executeAction();
             } else if (radar.protocols[i] == 'assist-allies') {
-                coordinatesResult = assistAllies.executeAction(scanList);
+                assistAllies.scan = scanList;
+                coordinatesResult = assistAllies.executeAction();
             }
         }
 

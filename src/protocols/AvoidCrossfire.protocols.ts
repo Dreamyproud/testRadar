@@ -3,13 +3,13 @@ import { Protocol } from "./Protocol.protocols";
 
 export class AvoidCrossfire extends Protocol{
 
-    executeAction(scan: Scan[]): Scan[] {
+    executeAction() {
         let scans: Scan[] = [];
 
-        for (let i = 0; i < scan.length; i++) {
-            const result = scan[i].allies;
+        for (let i = 0; i < this.scan.length; i++) {
+            const result = this.scan[i].allies;
             if (result == null) {
-                scans.push(scan[i]);
+                scans.push(this.scan[i]);
             }
         }
         return scans;
